@@ -13,9 +13,9 @@ import proyecto.entity.Horario;
 
 public class HorarioDAO {
 
-    public static Horario getHorario(final int id) {
+    public static Horario getHorario(int id) {
          final String QUERY = "SELECT * FROM poo_horario\n" +
-                                "WHERE doctor.id=?";
+                                "WHERE doctor_id=?";
 
     final Connection conexion = Conexion.getConexion();
 
@@ -67,7 +67,7 @@ public class HorarioDAO {
     }
 
 
-public static int crearHorario(final Horario horario) {
+public static int crearHorario(Horario horario) {
     if(horario== null) return -1;
     final String QUERY_1 = "INSERT INTO poo_horario VALUES (?,?,?)";
    
@@ -90,7 +90,7 @@ public static int crearHorario(final Horario horario) {
 }
 
 
-public static int actualizarHorario(final Horario horario) {
+public static int actualizarHorario(Horario horario) {
      if(horario == null) return -1;
      final String QUERY_1 = "UPDATE poo_horario SET \n" +
                             "horaInicio=?, \n" +
