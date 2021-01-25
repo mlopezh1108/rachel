@@ -7,6 +7,7 @@ package proyecto.ui.login;
 
 import proyecto.dao.LoginDAO;
 import proyecto.entity.Paciente;
+import proyecto.ui.registro.RegistroUI;
 
 /**
  *
@@ -153,8 +154,10 @@ public class LoginUI extends javax.swing.JFrame {
         tf_contrasenia.setText("");
     }
     private void lb_registroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_registroMouseClicked
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
+        RegistroUI registroUI = new RegistroUI();
+        this.dispose();
+        registroUI.setVisible(true);
     }//GEN-LAST:event_lb_registroMouseClicked
 
     /**
