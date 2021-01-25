@@ -14,8 +14,8 @@ public class Direccion {
     public Direccion() {
     }
 
-    public Direccion(int id, String calle, String numeroExterior, String NumeroInterior, String colonia, int codigoPostal,
-            String delegacionMunicipio, String estado, int persona_id) {
+    public Direccion(int id, String calle, String numeroExterior, String NumeroInterior, String colonia,
+            int codigoPostal, String delegacionMunicipio, String estado, int persona_id) {
         this.id = id;
         this.calle = calle;
         this.numeroExterior = numeroExterior;
@@ -33,7 +33,7 @@ public class Direccion {
 
     public void setId(int id) {
         this.id = id;
-    }    
+    }
 
     public String getCalle() {
         return this.calle;
@@ -98,21 +98,14 @@ public class Direccion {
     public void setPersona_id(int persona_id) {
         this.persona_id = persona_id;
     }
-     
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", calle='" + getCalle() + "'" +
-            ", numeroExterior='" + getNumeroExterior() + "'" +
-            ", NumeroInterior='" + getNumeroInterior() + "'" +
-            ", colonia='" + getColonia() + "'" +
-            ", codigoPostal='" + getCodigoPostal() + "'" +
-            ", delegacionMunicipio='" + getDelegacionMunicipio() + "'" +
-            ", estado='" + getEstado() + "'" +
-            ", persona_id='" + getPersona_id() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", calle='" + getCalle() + "'" + ", numeroExterior='"
+                + getNumeroExterior() + "'" + ", NumeroInterior='" + getNumeroInterior() + "'" + ", colonia='"
+                + getColonia() + "'" + ", codigoPostal='" + getCodigoPostal() + "'" + ", delegacionMunicipio='"
+                + getDelegacionMunicipio() + "'" + ", estado='" + getEstado() + "'" + ", persona_id='" + getPersona_id()
+                + "'" + "}";
     }
-    
+
 }

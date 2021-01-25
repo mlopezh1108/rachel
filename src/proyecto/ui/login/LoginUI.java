@@ -59,6 +59,7 @@ public class LoginUI extends javax.swing.JFrame {
         lb_registro.setFont(new java.awt.Font("Tahoma", 3, 13)); // NOI18N
         lb_registro.setForeground(new java.awt.Color(0, 0, 255));
         lb_registro.setText("Haz clic aquí");
+        lb_registro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lb_registro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lb_registroMouseClicked(evt);

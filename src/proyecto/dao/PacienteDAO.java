@@ -1,9 +1,6 @@
 package proyecto.dao;
 
 import java.util.ArrayList;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -97,7 +94,7 @@ public static Paciente getPaciente(int numeroPaciente) {
                                 "correoElectronico, usuario, contrasenia)\n" +
                                 "VALUES (?,?,?,?,?,?,?,?)";
         final String QUERY_2 =  "INSERT INTO poo_paciente (numeroPaciente, persona_id)\n"+
-                                "VALUES (?,?)";
+                                "VALUES (?,(SELECT id FROM poo_persona WHERE usuario=?))";
         
         
         Connection conexion = Conexion.getConexion();
@@ -114,11 +111,10 @@ public static Paciente getPaciente(int numeroPaciente) {
             sentencia.setString(7, paciente.getUsuario());
             sentencia.setString(8, paciente.getContrasenia());
             sentencia.executeUpdate();
-            int idPersona = sentencia.executeUpdate();
-
+            
             sentencia = conexion.prepareStatement(QUERY_2);
             sentencia.setInt(1, paciente.getNumeroPaciente());
-            sentencia.setInt(2, idPersona);
+            sentencia.setString(2, paciente.getUsuario());
             sentencia.executeUpdate();
             
             conexion.commit();
@@ -142,7 +138,7 @@ public static Paciente getPaciente(int numeroPaciente) {
                                 "usuario=?, \n" +
                                 "contrasenia=? \n" +
                                 "WHERE id=?";
-        final String QUERY_2 = "UPDATE poo_paciente SET numeroPaciente=?\n" + 
+        final String QUERY_2 =  "UPDATE poo_paciente SET numeroPaciente=?\n" + 
                                 "WHERE persona_id=?";
         
         
@@ -179,15 +175,29 @@ public static Paciente getPaciente(int numeroPaciente) {
     }
 
     public static int borrarPaciente(int numeroPaciente) {
-        final String QUERY = "DELETE FROM poo_paciente WHERE numeroPaciente=?";
+        final String QUERY_1 = "SELECT persona_id FROM poo_paciente WHERE numeroPaciente=?";
+        final String QUERY_2 = "DELETE FROM poo_paciente WHERE numeroPaciente=?";
+        final String QUERY_3 = "DELETE FROM poo_persona WHERE id=?";
 
         Connection conexion = Conexion.getConexion();
-
+        int id = -1;
         try {
-            PreparedStatement sentencia = conexion.prepareStatement(QUERY);
+            PreparedStatement sentencia = conexion.prepareStatement(QUERY_1);
+            ResultSet resultado = sentencia.executeQuery();
 
-            sentencia.setInt(1, numeroPaciente);
+            if(resultado.next())
+               id = resultado.getInt("id");
+            sentencia.close();
+
+            sentencia = conexion.prepareStatement(QUERY_2);
+            sentencia.setInt(1, id);
             sentencia.executeUpdate();
+            sentencia.close();
+
+            sentencia = conexion.prepareStatement(QUERY_3);
+            sentencia.setInt(1, id);
+            sentencia.executeUpdate();
+            sentencia.close();
             
             conexion.commit();
             conexion.close();

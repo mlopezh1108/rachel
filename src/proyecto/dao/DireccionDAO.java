@@ -79,7 +79,10 @@ public class DireccionDAO {
 
     public static int crearDireccion(Direccion direccion) {
          if(direccion == null) return -1;
-         final String QUERY_1 = "INSERT INTO direccion VALUES (?,?,?,?,?,?,?,?)";
+         final String QUERY_1 = "INSERT INTO poo_direccion (calle, numeroExterior,\n" +
+                                "numeroInterior, colonia, codigoPostal,\n" +
+                                "delegacionMunicipio, estado, persona_id)\n" +
+                                "VALUES (?,?,?,?,?,?,?,?)";
         
          Connection conexion = Conexion.getConexion();
         
@@ -93,9 +96,10 @@ public class DireccionDAO {
              sentencia.setString(6, direccion.getDelegacionMunicipio());
              sentencia.setString(7, direccion.getEstado());
              sentencia.setInt(8, direccion.getPersona_id());
+             System.out.println(sentencia);
              sentencia.executeUpdate();
-             sentencia.close();
             
+             conexion.commit();
              conexion.close();
              return 0;
          } catch (SQLException e) {
@@ -108,34 +112,31 @@ public class DireccionDAO {
     public static int actualizarDireccion(Direccion direccion) {
          if(direccion == null) return -1;
          final String QUERY_1 = "UPDATE poo_direccion SET \n" +
-                                 "calle=?, \n" +
-                                 "numeroExterior=?, \n" +
-                                 "NumeroInterior=?, \n" +
-                                 "colonia=?, \n" +
-                                 "codigoPostal=?, \n" +
-                                 "delegacionMunicipio=?, \n" +
-                                 "estado=?, \n" +
-                                 "persona_id=?, \n" +
-                                 "WHERE id=?";
+                                "calle=?, \n" +
+                                "numeroExterior=?, \n" +
+                                "NumeroInterior=?, \n" +
+                                "colonia=?, \n" +
+                                "codigoPostal=?, \n" +
+                                "delegacionMunicipio=?, \n" +
+                                "estado=?, \n" +
+                                "WHERE id=?";
         
         Connection conexion = Conexion.getConexion();
         
         try {
             PreparedStatement sentencia = conexion.prepareStatement(QUERY_1, Statement.RETURN_GENERATED_KEYS);
             
-             sentencia.setString(1, direccion.getCalle());
-             sentencia.setString(2, direccion.getNumeroExterior());
-             sentencia.setString(3, direccion.getNumeroInterior());
-             sentencia.setString(4, direccion.getColonia());
-             sentencia.setInt(5, direccion.getCodigoPostal());
-             sentencia.setString(6, direccion.getDelegacionMunicipio());
-             sentencia.setString(7, direccion.getEstado());
-             sentencia.setInt(8, direccion.getPersona_id());
+            sentencia.setString(1, direccion.getCalle());
+            sentencia.setString(2, direccion.getNumeroExterior());
+            sentencia.setString(3, direccion.getNumeroInterior());
+            sentencia.setString(4, direccion.getColonia());
+            sentencia.setInt(5, direccion.getCodigoPostal());
+            sentencia.setString(6, direccion.getDelegacionMunicipio());
+            sentencia.setString(7, direccion.getEstado());
             
-             sentencia.close();
-            
-             conexion.close();
-             return 0;
+            conexion.commit();            
+            conexion.close();
+            return 0;
         } catch (SQLException e) {
              System.out.println(e.getMessage());
         }

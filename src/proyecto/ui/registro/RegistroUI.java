@@ -1,7 +1,12 @@
 package proyecto.ui.registro;
 
 import java.sql.Date;
+
+import javax.swing.JOptionPane;
+
+import proyecto.dao.DireccionDAO;
 import proyecto.dao.PacienteDAO;
+import proyecto.entity.Direccion;
 import proyecto.entity.Paciente;
 import proyecto.ui.login.LoginUI;
 
@@ -91,25 +96,8 @@ public class RegistroUI extends javax.swing.JFrame {
 
         jLabel9.setText("Calle:");
 
-        tf_nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_nombreActionPerformed(evt);
-            }
-        });
-
-        tf_apellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_apellidoMaternoActionPerformed(evt);
-            }
-        });
-
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel10.setText("Direccion");
-
-        tf_calle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_calleActionPerformed(evt);
-            }
-        });
 
         jLabel11.setText("Num. Ext.:");
 
@@ -121,32 +109,15 @@ public class RegistroUI extends javax.swing.JFrame {
 
         jLabel15.setText("Delegacion/Municipio:");
 
-        tf_num_int.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_num_intActionPerformed(evt);
-            }
-        });
-
         jLabel16.setText("Estado:");
 
-        tf_confirmar_contrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_confirmar_contraseniaActionPerformed(evt);
-            }
-        });
-
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel17.setText("Datos personales");
 
         bt_registro.setText("Finalizar registro");
         bt_registro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_registroActionPerformed(evt);
-            }
-        });
-
-        tf_contrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_contraseniaActionPerformed(evt);
             }
         });
 
@@ -168,84 +139,84 @@ public class RegistroUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel17)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tf_apellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tf_contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel7)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addGap(80, 80, 80)
-                                                    .addComponent(jLabel9))
-                                                .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
-                                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(tf_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                        .addComponent(tf_calle, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tf_colonia)
-                                        .addComponent(tf_codigo_postal)))))
-                        .addGap(0, 335, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 51, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_apellidoPaterno, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(tf_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(tf_fechaNacimiento))
+                        .addGap(22, 22, 22))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addGap(20, 20, 20))
                                             .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(bt_Cancelar)
                                         .addGap(15, 15, 15)))
+                                .addGap(13, 13, 13))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tf_num_ext, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(16, 16, 16)
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tf_num_int, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tf_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tf_confirmar_contrasenia, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(bt_registro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addComponent(tf_delegacion_minicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(24, 24, 24))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel17)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel1))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tf_correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tf_apellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(tf_contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel7)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                            .addGap(80, 80, 80)
+                                                            .addComponent(jLabel9))
+                                                        .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(tf_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                                .addComponent(tf_calle, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tf_colonia)
+                                                .addComponent(tf_codigo_postal)))))
+                                .addGap(62, 62, 62)
+                                .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
-                                .addComponent(tf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(55, 55, 55)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4))
+                                .addComponent(tf_num_ext, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel12)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tf_apellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(22, 22, 22))))))
+                                .addComponent(tf_num_int))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tf_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tf_confirmar_contrasenia, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(bt_registro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(tf_delegacion_minicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(24, 24, 24))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(40, 40, 40)
@@ -334,22 +305,6 @@ public class RegistroUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_nombreActionPerformed
-
-    private void tf_calleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_calleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_calleActionPerformed
-
-    private void tf_num_intActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_num_intActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_num_intActionPerformed
-
-    private void tf_confirmar_contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_confirmar_contraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_confirmar_contraseniaActionPerformed
-
     private void bt_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_registroActionPerformed
         // TODO add your handling code here:
         int numeroPaciente; 
@@ -365,33 +320,60 @@ public class RegistroUI extends javax.swing.JFrame {
             tf_telefono.getText(),
             tf_correoElectronico.getText(),
             tf_usuario.getText(),
-            tf_contrasenia.getText(),
+            tf_contrasenia.getPassword().toString(),
             numeroPaciente
         ));
         if(resultado == 0) {
-            
+            Paciente paciente = PacienteDAO.getPaciente(numeroPaciente);
+            resultado = DireccionDAO.crearDireccion(new Direccion(
+                0,
+                tf_calle.getText(),
+                tf_num_ext.getText(),
+                tf_num_int.getText(),
+                tf_colonia.getText(),
+                Integer.parseInt(tf_codigo_postal.getText()),
+                tf_delegacion_minicipio.getText(),
+                tf_estado.getText(),
+                paciente.getId()
+            ));
+            if(resultado == 0){
+                JOptionPane.showMessageDialog(this, "Registro exitoso");
+                this.limpiarFormulario();
+            } else {
+                JOptionPane.showMessageDialog(this, "Ocurrió un error en el registro");
+                PacienteDAO.borrarPaciente(numeroPaciente);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "El nombre de usuario ya existe");
         }
-
-        
-        
-        
-            
     }//GEN-LAST:event_bt_registroActionPerformed
 
-    private void tf_contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_contraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_contraseniaActionPerformed
 
     private void bt_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_CancelarActionPerformed
         // TODO add your handling code here:
         LoginUI loginUI = new LoginUI();
+        limpiarFormulario();
         this.dispose();
         loginUI.setVisible(true);
     }//GEN-LAST:event_bt_CancelarActionPerformed
 
-    private void tf_apellidoMaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_apellidoMaternoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_apellidoMaternoActionPerformed
+    private void limpiarFormulario() {
+        tf_nombre.setText("");
+        tf_apellidoPaterno.setText("");
+        tf_apellidoMaterno.setText("");
+        tf_fechaNacimiento.setText("");
+        tf_telefono.setText("");
+        tf_correoElectronico.setText("");
+        tf_usuario.setText("");
+        tf_contrasenia.setText("");
+        tf_calle.setText("");
+        tf_num_ext.setText("");
+        tf_num_int.setText("");
+        tf_colonia.setText("");
+        tf_codigo_postal.setText("");
+        tf_delegacion_minicipio.setText("");
+        tf_estado.setText("");
+    }
 
     /**
      * @param args the command line arguments
