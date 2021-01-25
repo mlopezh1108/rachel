@@ -27,21 +27,114 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lb_bienvenido = new javax.swing.JLabel();
+        lb_usuario = new javax.swing.JLabel();
+        lb_contrasenia = new javax.swing.JLabel();
+        tf_contrasenia = new javax.swing.JTextField();
+        tf_usuario = new javax.swing.JTextField();
+        lb_aviso = new javax.swing.JLabel();
+        lb_registro = new javax.swing.JLabel();
+        bt_ingresar = new javax.swing.JButton();
+        bt_cancelar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lb_bienvenido.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lb_bienvenido.setText("Bienvenido");
+
+        lb_usuario.setText("Usuario:");
+
+        lb_contrasenia.setText("Contraseña:");
+
+        tf_contrasenia.setToolTipText("Ingrese contraseña");
+
+        tf_usuario.setToolTipText("Ingrese usuario");
+
+        lb_aviso.setText("¿Aún no tienes cuenta?");
+
+        lb_registro.setFont(new java.awt.Font("Tahoma", 3, 13)); // NOI18N
+        lb_registro.setForeground(new java.awt.Color(0, 0, 255));
+        lb_registro.setText("Haz clic aquí");
+
+        bt_ingresar.setText("Ingresar");
+        bt_ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_ingresarActionPerformed(evt);
+            }
+        });
+
+        bt_cancelar.setText("Cancelar");
+        bt_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(bt_cancelar)
+                            .addGap(44, 44, 44)
+                            .addComponent(bt_ingresar))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lb_contrasenia)
+                                .addComponent(lb_usuario))
+                            .addGap(36, 36, 36)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tf_contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tf_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lb_aviso)
+                        .addGap(18, 18, 18)
+                        .addComponent(lb_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lb_bienvenido)
+                .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lb_bienvenido)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_usuario)
+                    .addComponent(tf_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_contrasenia)
+                    .addComponent(tf_contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_aviso)
+                    .addComponent(lb_registro))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_ingresar)
+                    .addComponent(bt_cancelar))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ingresarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_bt_ingresarActionPerformed
+
+    private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +172,14 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_cancelar;
+    private javax.swing.JButton bt_ingresar;
+    private javax.swing.JLabel lb_aviso;
+    private javax.swing.JLabel lb_bienvenido;
+    private javax.swing.JLabel lb_contrasenia;
+    private javax.swing.JLabel lb_registro;
+    private javax.swing.JLabel lb_usuario;
+    private javax.swing.JTextField tf_contrasenia;
+    private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
 }
