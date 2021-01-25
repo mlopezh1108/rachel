@@ -102,10 +102,7 @@ public static Paciente getPaciente(int numeroPaciente) {
         
         Connection conexion = Conexion.getConexion();
         
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(paciente.getContrasenia().getBytes(StandardCharsets.UTF_8));
-            
+        try {           
             PreparedStatement sentencia = conexion.prepareStatement(QUERY_1);
             
             sentencia.setString(1, paciente.getNombre());
@@ -115,7 +112,7 @@ public static Paciente getPaciente(int numeroPaciente) {
             sentencia.setString(5, paciente.getCorreoElectronico());
             sentencia.setString(6, paciente.getTelefono());
             sentencia.setString(7, paciente.getUsuario());
-            sentencia.setString(8, hash.toString());
+            sentencia.setString(8, paciente.getContrasenia());
             sentencia.executeUpdate();
             int idPersona = sentencia.executeUpdate();
 
@@ -127,7 +124,7 @@ public static Paciente getPaciente(int numeroPaciente) {
             conexion.commit();
             conexion.close();
             return 0;
-        } catch (SQLException | NoSuchAlgorithmException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return -1;
@@ -153,9 +150,6 @@ public static Paciente getPaciente(int numeroPaciente) {
         Connection conexion = Conexion.getConexion();
         
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");        
-            byte[] hash = digest.digest(paciente.getContrasenia().getBytes(StandardCharsets.UTF_8));
-
             PreparedStatement sentencia = conexion.prepareStatement(QUERY_1, Statement.RETURN_GENERATED_KEYS);
             
             sentencia.setString(1, paciente.getNombre());
@@ -165,7 +159,7 @@ public static Paciente getPaciente(int numeroPaciente) {
             sentencia.setString(5, paciente.getCorreoElectronico());
             sentencia.setString(6, paciente.getTelefono());
             sentencia.setString(7, paciente.getUsuario());
-            sentencia.setString(8, hash.toString());
+            sentencia.setString(8, paciente.getContrasenia());
             sentencia.setInt(9, paciente.getId());
             sentencia.executeUpdate();
             sentencia.close();
@@ -178,7 +172,7 @@ public static Paciente getPaciente(int numeroPaciente) {
             conexion.commit();
             conexion.close();
             return 0;
-        } catch (SQLException | NoSuchAlgorithmException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return -1;

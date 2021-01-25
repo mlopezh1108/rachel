@@ -8,7 +8,10 @@ package proyecto;
 import java.util.ArrayList;
 
 import proyecto.entity.Horario;
+import proyecto.entity.Paciente;
 import proyecto.dao.HorarioDAO;
+import proyecto.dao.LoginDAO;
+import proyecto.ui.login.LoginUI;
 
 /**
  *
@@ -20,8 +23,8 @@ public class Proyecto {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Horario horario = HorarioDAO.getHorario(1);
-        System.out.println(horario);
+        LoginUI loginUI = new LoginUI();
+        loginUI.setVisible(true);
     }
     
 }

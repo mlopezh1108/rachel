@@ -14,45 +14,50 @@ import proyecto.db.Conexion;
 import proyecto.entity.Doctor;
 
 public class DoctorDAO {
-    // public static Doctor getPaciente(int id) {
-    //     final String QUERY = "SELECT ps.id, ps.nombre, ps.apellidoPaterno,\n" +
-    //                          "ps.apellidoMaterno, ps.fechaNacimiento, ps.telefono,\n" +
-    //                          "ps.correoElectronico, ps.usuario, em.numeroEmpleado\n" +
-    //                          "em.salario, em.fechaIngreso, dc.cedula\n" +
-    //                          "FROM empleado em INNER JOIN\n" +
-    //                          "persona ps ON em.persona_id = ps.id\n" +
-    //                          "INNER JOIN doctor dc ON dc.empleado_id = em.id\n" +
-    //                          "WHERE ps.id=?";
+    public static Doctor getDoctor(int id) {
+        final String QUERY =    "select PER.id, PER.nombre, PER.apellidopaterno,\n" +
+                                "PER.apellidomaterno, PER.fechanacimiento,\n" +
+                                "PER.telefono, PER.correoelectronico, PER.usuario,\n" +
+                                "EMP.numeroempleado, EMP.salario, EMP.fechaingreso,\n" + 
+                                "DR.cedula, DR.especialidad	from poo_doctor DR\n" + 
+                                "inner join poo_empleado EMP on DR.empleado_id = EMP.id\n" +
+                                "inner join poo_persona PER on PER.id = EMP.persona_id\n" + 
+                                "WHERE DR.cedula = ?";
+
         
-    //     Connection conexion = Conexion.getConexion();
+        Connection conexion = Conexion.getConexion();
 
-    //     Doctor paciente;
+        Doctor doctor = null;
         
-    //     try {
-    //         PreparedStatement sentencia = conexion.prepareStatement(QUERY);
-    //         sentencia.setInt(1, id);
-    //         ResultSet resultado = sentencia.executeQuery();
+        try {
+            PreparedStatement sentencia = conexion.prepareStatement(QUERY);
+            sentencia.setInt(1, id);
+            ResultSet resultado = sentencia.executeQuery();
 
-    //         if(resultado.next())
-    //             paciente = new Doctor(
-    //                 resultado.getInt("id"),
-    //                 resultado.getString("nombre"),
-    //                 resultado.getString("apellidoPaterno"),
-    //                 resultado.getString("apellidoMaterno"),
-    //                 resultado.getDate("fechaNacimiento"),
-    //                 resultado.getString("telefono"),
-    //                 resultado.getString("correoElectronico"),
-    //                 resultado.getString("usuario"), "",
-    //                 resultado.getInt("numeroPaciente")
-    //             );
-
-    //     } catch (SQLException e) {
-    //         System.out.println(e.getMessage());
-    //     } finally {
-    //         conexion.close();
-    //     }
-    //     return paciente;
-    // }
+            if(resultado.next())
+                doctor = new Doctor(
+                    resultado.getInt("id"),
+                    resultado.getString("nombre"),
+                    resultado.getString("apellidoPaterno"),
+                    resultado.getString("apellidoMaterno"),
+                    resultado.getDate("fechaNacimiento"),
+                    resultado.getString("telefono"),
+                    resultado.getString("correoElectronico"),
+                    resultado.getString("usuario"),
+                    resultado.getString(""),
+                    resultado.getInt("numeroEmpleado"),
+                    resultado.getFloat("salario"),
+                    resultado.getDate("fechaIngreso"),
+                    resultado.getInt("clinida_id"),
+                    resultado.getInt("cedula"),
+                    resultado.getString("especialidad")
+                );
+            conexion.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return doctor;
+    }
 
     // public static ArrayList<Doctor> getPacientes() {
     //     final String QUERY = "SELECT ps.id, ps.nombre, ps.apellidoPaterno,\n" +

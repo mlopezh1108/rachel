@@ -5,16 +5,19 @@
  */
 package proyecto.ui.login;
 
+import proyecto.dao.LoginDAO;
+import proyecto.entity.Paciente;
+
 /**
  *
  * @author mlope
  */
-public class Login extends javax.swing.JFrame {
+public class LoginUI extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public LoginUI() {
         initComponents();
     }
 
@@ -55,6 +58,11 @@ public class Login extends javax.swing.JFrame {
         lb_registro.setFont(new java.awt.Font("Tahoma", 3, 13)); // NOI18N
         lb_registro.setForeground(new java.awt.Color(0, 0, 255));
         lb_registro.setText("Haz clic aquí");
+        lb_registro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_registroMouseClicked(evt);
+            }
+        });
 
         bt_ingresar.setText("Ingresar");
         bt_ingresar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,12 +137,25 @@ public class Login extends javax.swing.JFrame {
 
     private void bt_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ingresarActionPerformed
         // TODO add your handling code here:
-        
+        Paciente paciente = LoginDAO.encontrarUsuario(tf_usuario.getText(), tf_contrasenia.getText());
+        if (paciente == null)
+            this.limpiarFormulario();
+        System.out.println(paciente);
     }//GEN-LAST:event_bt_ingresarActionPerformed
 
     private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
         // TODO add your handling code here:
+        this.limpiarFormulario();
     }//GEN-LAST:event_bt_cancelarActionPerformed
+
+    private void limpiarFormulario() {
+        tf_usuario.setText("");
+        tf_contrasenia.setText("");
+    }
+    private void lb_registroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_registroMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_lb_registroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -153,20 +174,21 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new LoginUI().setVisible(true);
             }
         });
     }
