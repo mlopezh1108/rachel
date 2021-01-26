@@ -19,7 +19,7 @@ public class DoctorDAO {
                                 "PER.apellidomaterno, PER.fechanacimiento,\n" +
                                 "PER.telefono, PER.correoelectronico, PER.usuario,\n" +
                                 "EMP.numeroempleado, EMP.salario, EMP.fechaingreso,\n" + 
-                                "DR.cedula, DR.especialidad	from poo_doctor DR\n" + 
+                                "EMP.clinica_id, DR.cedula, DR.especialidad	from poo_doctor DR\n" + 
                                 "inner join poo_empleado EMP on DR.empleado_id = EMP.id\n" +
                                 "inner join poo_persona PER on PER.id = EMP.persona_id\n" + 
                                 "WHERE DR.cedula = ?";
@@ -43,12 +43,11 @@ public class DoctorDAO {
                     resultado.getDate("fechaNacimiento"),
                     resultado.getString("telefono"),
                     resultado.getString("correoElectronico"),
-                    resultado.getString("usuario"),
-                    resultado.getString(""),
+                    resultado.getString("usuario"),"",
                     resultado.getInt("numeroEmpleado"),
                     resultado.getFloat("salario"),
                     resultado.getDate("fechaIngreso"),
-                    resultado.getInt("clinida_id"),
+                    resultado.getInt("clinica_id"),
                     resultado.getInt("cedula"),
                     resultado.getString("especialidad")
                 );
@@ -59,151 +58,46 @@ public class DoctorDAO {
         return doctor;
     }
 
-    // public static ArrayList<Doctor> getPacientes() {
-    //     final String QUERY = "SELECT ps.id, ps.nombre, ps.apellidoPaterno,\n" +
-    //                             "ps.apellidoMaterno, ps.fechaNacimiento, ps.telefono,\n" +
-    //                             "ps.correoElectronico, ps.usuario, pc.numeroPaciente\n" + 
-    //                             "FROM paciente pc INNER JOIN\n" +
-    //                             "persona ps ON pc.persona_id = ps.id";
+    public static ArrayList<Doctor> getDoctores() {
+        final String QUERY =    "select PER.id, PER.nombre, PER.apellidopaterno,\n" +
+                                "PER.apellidomaterno, PER.fechanacimiento,\n" +
+                                "PER.telefono, PER.correoelectronico, PER.usuario,\n" +
+                                "EMP.numeroempleado, EMP.salario, EMP.fechaingreso,\n" + 
+                                "EMP.clinica_id, DR.cedula, DR.especialidad	from poo_doctor DR\n" + 
+                                "inner join poo_empleado EMP on DR.empleado_id = EMP.id\n" +
+                                "inner join poo_persona PER on PER.id = EMP.persona_id";
 
-    //     final ArrayList<Doctor> pacientes = new ArrayList<Doctor>();
-
-    //     Connection conexion = Conexion.getConexion();
         
-    //     try {
-    //         PreparedStatement sentencia = conexion.prepareStatement(QUERY);
-    //         ResultSet resultado = sentencia.executeQuery();
-            
-    //         while (resultado.next())
-    //             pacientes.add(
-    //                 new Doctor(
-    //                     resultado.getInt("id"),
-    //                     resultado.getString("nombre"),
-    //                     resultado.getString("apellidoPaterno"),
-    //                     resultado.getString("apellidoMaterno"),
-    //                     resultado.getDate("fechaNacimiento"),
-    //                     resultado.getString("telefono"),
-    //                     resultado.getString("correoElectronico"),
-    //                     resultado.getString("usuario"), "",
-    //                     resultado.getInt("numeroPaciente")
-    //                 )
-    //             );
-    //     } catch (SQLException e) {
-    //         System.out.println(e.getMessage());
-    //     } finally {
-    //         conexion.close();
-    //     }
-    //     return pacientes;
-    // }
+        Connection conexion = Conexion.getConexion();
 
-    // public static int crearPaciente(Doctor paciente) {
-    //     if(paciente == null) return -1;
-    //     final String QUERY_1 = "INSERT INTO persona VALUES (?,?,?,?,?,?,?,?)";
-    //     final String QUERY_2 = "INSERT INTO paciente VALUES (?,(\n" + 
-    //                            "SELECT id FROM persona WHERE usuario=?))";
+        ArrayList<Doctor> doctores = new ArrayList<Doctor>();
         
-    //     MessageDigest digest = MessageDigest.getInstance("SHA-256");        
-    //     byte[] hash = digest.digest(paciente.getContrasenia().getBytes(StandardCharsets.UTF_8));
-        
-    //     Connection conexion = Conexion.getConexion();
-        
-    //     try {
-    //         PreparedStatement sentencia = conexion.prepareStatement(QUERY_1);
-            
-    //         sentencia.setString(1, paciente.getNombre());
-    //         sentencia.setString(2, paciente.getApellidoPaterno());
-    //         sentencia.setString(3, paciente.getApellidoMaterno());
-    //         sentencia.setDate(4, paciente.getFechaNacimiento());
-    //         sentencia.setString(5, paciente.getCorreoElectronico());
-    //         sentencia.setString(6, paciente.getTelefono());
-    //         sentencia.setString(7, paciente.getUsuario());
-    //         sentencia.setString(8, hash.toString());
-    //         sentencia.executeUpdate();
-    //         sentencia.close();
+        try {
+            PreparedStatement sentencia = conexion.prepareStatement(QUERY);
+            ResultSet resultado = sentencia.executeQuery();
 
-    //         sentencia = conexion.prepareStatement(QUERY_2);
-    //         sentencia.setInt(1, paciente.getNumeroPaciente());
-    //         sentencia.setString(2, paciente.getUsuario());
-    //         sentencia.executeUpdate();
-            
-    //         conexion.close();
-    //         return 0;
-    //     } catch (SQLException e) {
-    //         System.out.println(e.getMessage());
-    //     } finally {
-    //         conexion.close();
-    //     }
-    //     return -1;
-    // }
-
-    // public static int actualizarPaciente(Doctor paciente) {
-    //     if(paciente == null) return -1;
-    //     final String QUERY_1 = "UPDATE persona SET \n" +
-    //                             "nombre=?, \n" +
-    //                             "apellidoPaterno=?, \n" +
-    //                             "apellidoMaterno=?, \n" +
-    //                             "fechaNacimiento=?, \n" +
-    //                             "telefono=?, \n" +
-    //                             "correoElectronico=?, \n" +
-    //                             "usuario=?, \n" +
-    //                             "contrasenia=?, \n" +
-    //                             "WHERE id=?";
-    //     final String QUERY_2 = "UPDATE paciente SET numeroPaciente=?\n" + 
-    //                             "WHERE persona_id=?";
-        
-    //     MessageDigest digest = MessageDigest.getInstance("SHA-256");        
-    //     byte[] hash = digest.digest(paciente.getContrasenia().getBytes(StandardCharsets.UTF_8));
-        
-    //     Connection conexion = Conexion.getConexion();
-        
-    //     try {
-    //         PreparedStatement sentencia = conexion.prepareStatement(QUERY_1, Statement.RETURN_GENERATED_KEYS);
-            
-    //         sentencia.setString(1, paciente.getNombre());
-    //         sentencia.setString(2, paciente.getApellidoPaterno());
-    //         sentencia.setString(3, paciente.getApellidoMaterno());
-    //         sentencia.setDate(4, paciente.getFechaNacimiento());
-    //         sentencia.setString(5, paciente.getCorreoElectronico());
-    //         sentencia.setString(6, paciente.getTelefono());
-    //         sentencia.setString(7, paciente.getUsuario());
-    //         sentencia.setString(8, hash.toString());
-    //         sentencia.setInt(9, paciente.getId());
-    //         int idPersona = sentencia.executeUpdate();
-    //         sentencia.close();
-
-    //         sentencia = conexion.prepareStatement(QUERY_2);
-    //         sentencia.setInt(1, paciente.getNumeroPaciente());
-    //         sentencia.setInt(2, paciente.getId());
-    //         sentencia.executeUpdate();
-            
-    //         conexion.close();
-    //         return 0;
-    //     } catch (SQLException e) {
-    //         System.out.println(e.getMessage());
-    //     } finally {
-    //         conexion.close();
-    //     }
-    //     return -1;
-    // }
-
-    // public static int borrarPaciente(int id) {
-    //     final String QUERY = "DELETE FROM paciente WHERE persona_id=?";
-
-    //     Connection conexion = Conexion.getConexion();
-
-    //     try {
-    //         PreparedStatement sentencia = conexion.prepareStatement(QUERY);
-
-    //         sentencia.setInt(id);
-    //         sentencia.executeUpdate();
-            
-    //         conexion.close();
-    //         return 0;
-    //     } catch (SQLException e) {
-    //         System.out.println(e.getMessage());
-    //     } finally {
-    //         conexion.close();
-    //     }
-    //     return -1;
-    // }
+            while(resultado.next())
+                doctores.add(new Doctor(
+                    resultado.getInt("id"),
+                    resultado.getString("nombre"),
+                    resultado.getString("apellidoPaterno"),
+                    resultado.getString("apellidoMaterno"),
+                    resultado.getDate("fechaNacimiento"),
+                    resultado.getString("telefono"),
+                    resultado.getString("correoElectronico"),
+                    resultado.getString("usuario"), "",
+                    resultado.getInt("numeroEmpleado"),
+                    resultado.getFloat("salario"),
+                    resultado.getDate("fechaIngreso"),
+                    resultado.getInt("clinica_id"),
+                    resultado.getInt("cedula"),
+                    resultado.getString("especialidad")
+                ));
+            System.out.println(doctores);
+            conexion.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return doctores;
+    }
 }

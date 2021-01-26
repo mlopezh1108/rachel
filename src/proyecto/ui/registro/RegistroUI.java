@@ -307,6 +307,10 @@ public class RegistroUI extends javax.swing.JFrame {
 
     private void bt_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_registroActionPerformed
         // TODO add your handling code here:
+        if(!tf_contrasenia.getText().equals(tf_confirmar_contrasenia.getText())) {
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
+            return;
+        }
         int numeroPaciente; 
         do {
             numeroPaciente = (int)Math.floor(Math.random()*(2147483647-1)+0);
@@ -320,7 +324,7 @@ public class RegistroUI extends javax.swing.JFrame {
             tf_telefono.getText(),
             tf_correoElectronico.getText(),
             tf_usuario.getText(),
-            tf_contrasenia.getPassword().toString(),
+            tf_contrasenia.getText(),
             numeroPaciente
         ));
         if(resultado == 0) {
@@ -338,7 +342,10 @@ public class RegistroUI extends javax.swing.JFrame {
             ));
             if(resultado == 0){
                 JOptionPane.showMessageDialog(this, "Registro exitoso");
-                this.limpiarFormulario();
+                LoginUI loginUI = new LoginUI();
+                limpiarFormulario();
+                this.dispose();
+                loginUI.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Ocurrió un error en el registro");
                 PacienteDAO.borrarPaciente(numeroPaciente);

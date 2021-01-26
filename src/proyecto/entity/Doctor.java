@@ -34,4 +34,15 @@ public class Doctor extends Empleado {
         this.especialidad = especialidad;
     }
 
+
+    @Override
+    public String toString() {
+        return "{" +
+            " usuario=" + super.toString() +
+            " cedula='" + getCedula() + "'" +
+            ", especialidad='" + getEspecialidad() + "'" +
+            "}";
+    }
+
+
 }

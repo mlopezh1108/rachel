@@ -106,8 +106,8 @@ public static Paciente getPaciente(int numeroPaciente) {
             sentencia.setString(2, paciente.getApellidoPaterno());
             sentencia.setString(3, paciente.getApellidoMaterno());
             sentencia.setDate(4, paciente.getFechaNacimiento());
-            sentencia.setString(5, paciente.getCorreoElectronico());
-            sentencia.setString(6, paciente.getTelefono());
+            sentencia.setString(5, paciente.getTelefono());
+            sentencia.setString(6, paciente.getCorreoElectronico());
             sentencia.setString(7, paciente.getUsuario());
             sentencia.setString(8, paciente.getContrasenia());
             sentencia.executeUpdate();

@@ -5,8 +5,11 @@
  */
 package proyecto.ui.login;
 
+import javax.swing.JOptionPane;
+
 import proyecto.dao.LoginDAO;
 import proyecto.entity.Paciente;
+import proyecto.ui.doctor.ListarDoctoresUI;
 import proyecto.ui.registro.RegistroUI;
 
 /**
@@ -34,12 +37,12 @@ public class LoginUI extends javax.swing.JFrame {
         lb_bienvenido = new javax.swing.JLabel();
         lb_usuario = new javax.swing.JLabel();
         lb_contrasenia = new javax.swing.JLabel();
-        tf_contrasenia = new javax.swing.JTextField();
         tf_usuario = new javax.swing.JTextField();
         lb_aviso = new javax.swing.JLabel();
         lb_registro = new javax.swing.JLabel();
         bt_ingresar = new javax.swing.JButton();
         bt_cancelar = new javax.swing.JButton();
+        tf_contrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,8 +52,6 @@ public class LoginUI extends javax.swing.JFrame {
         lb_usuario.setText("Usuario:");
 
         lb_contrasenia.setText("Contraseña:");
-
-        tf_contrasenia.setToolTipText("Ingrese contraseña");
 
         tf_usuario.setToolTipText("Ingrese usuario");
 
@@ -97,16 +98,16 @@ public class LoginUI extends javax.swing.JFrame {
                                 .addComponent(lb_contrasenia)
                                 .addComponent(lb_usuario))
                             .addGap(36, 36, 36)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tf_contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tf_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                .addComponent(tf_contrasenia))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lb_aviso)
                         .addGap(18, 18, 18)
                         .addComponent(lb_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(61, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(102, Short.MAX_VALUE)
                 .addComponent(lb_bienvenido)
                 .addGap(97, 97, 97))
         );
@@ -140,9 +141,16 @@ public class LoginUI extends javax.swing.JFrame {
     private void bt_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ingresarActionPerformed
         // TODO add your handling code here:
         Paciente paciente = LoginDAO.encontrarUsuario(tf_usuario.getText(), tf_contrasenia.getText());
-        if (paciente == null)
-            this.limpiarFormulario();
-        System.out.println(paciente);
+        System.out.println(tf_contrasenia.getPassword().toString());
+        if (paciente == null){
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+            return;    
+        }
+        ListarDoctoresUI listarDoctoresUI = new ListarDoctoresUI();
+        listarDoctoresUI.cargarTabla();
+        listarDoctoresUI.setPaciente(paciente);
+        this.dispose();
+        listarDoctoresUI.setVisible(true);
     }//GEN-LAST:event_bt_ingresarActionPerformed
 
     private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
@@ -205,7 +213,7 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_contrasenia;
     private javax.swing.JLabel lb_registro;
     private javax.swing.JLabel lb_usuario;
-    private javax.swing.JTextField tf_contrasenia;
+    private javax.swing.JPasswordField tf_contrasenia;
     private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
 }

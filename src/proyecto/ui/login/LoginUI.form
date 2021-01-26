@@ -38,9 +38,9 @@
                               <Component id="lb_usuario" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tf_contrasenia" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="tf_usuario" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="tf_usuario" pref="180" max="32767" attributes="0"/>
+                              <Component id="tf_contrasenia" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -53,7 +53,7 @@
               <EmptySpace pref="61" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="102" max="32767" attributes="0"/>
               <Component id="lb_bienvenido" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
           </Group>
@@ -108,11 +108,6 @@
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tf_contrasenia">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Ingrese contrase&#xf1;a"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="tf_usuario">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Ingrese usuario"/>
@@ -155,6 +150,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_cancelarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="tf_contrasenia">
     </Component>
   </SubComponents>
 </Form>
